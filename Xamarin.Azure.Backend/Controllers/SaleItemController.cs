@@ -19,10 +19,24 @@ namespace Xamarin.Azure.Backend.Controllers
             DomainManager = new EntityDomainManager<SaleItem>(context, Request);
         }
 
+
         // GET tables/SaleItem
         public IQueryable<SaleItem> GetAllSaleItems()
         {
-            return Query();
+            return Query().Where(sp => sp.OwnerId == null);
+        }
+        public IQueryable<SaleItem> GetAllSaleItems(string userid)
+        {
+            var query = Query();
+            if (string.IsNullOrEmpty(userid))
+            {
+                query = query.Where(si => si.OwnerId == null);
+            }
+            else
+            {
+                query = query.Where(si => si.OwnerId == null || si.OwnerId == userid);
+            }
+            return query;
         }
 
         // GET tables/SaleItem/F366EBB2-6D7D-4E09-A4F2-DF16819F6302

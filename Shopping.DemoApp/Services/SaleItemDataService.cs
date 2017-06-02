@@ -69,7 +69,17 @@
                 await MobileService.SyncContext.PushAsync();
                 await saleItemsTable.PushFileChangesAsync();
 
-                await saleItemsTable.PullAsync("allSaleItems", this.saleItemsTable.CreateQuery());
+                var qparams = new Dictionary<string, string>();
+
+
+                if (AuthenticationService.Instance.UserIsAuthenticated)
+                {
+                    qparams.Add("userid", AuthenticationService.Instance.UserId);
+                }
+
+                qparams.Add("userid", "sid:1234");
+
+                await saleItemsTable.PullAsync("allSaleItems", this.saleItemsTable.CreateQuery().WithParameters(qparams));
             }
 
             catch (Exception e)
@@ -81,6 +91,12 @@
 
         public async Task AddItemAsync(SaleItem item, string imagePath)
         {
+            string userid = null;
+            if (MobileService.CurrentUser != null)
+            {
+                userid = MobileService.CurrentUser.UserId;
+            }
+            item.OwnerId = userid;
             await saleItemsTable.InsertAsync(item);
 
             string targetPath = await FileHelper.CopySaleItemFileAsync(item.Id, imagePath);

@@ -13,6 +13,8 @@
 
         public bool UserIsAuthenticated { get; private set; }
 
+        public string UserId { get; private set; }
+
         public static AuthenticationService Instance
         {
             get
@@ -45,6 +47,7 @@
                     }
 
                     UserIsAuthenticated = mobileUser != null;
+                    UserId = mobileUser != null ? mobileUser.UserId : null;
                 }
                 catch (Exception ex)
                 {                    
