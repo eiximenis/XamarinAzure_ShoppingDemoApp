@@ -245,6 +245,7 @@
     <None Include="Properties\PublishProfiles\xamarin-azure-demo - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\xamarin-azure-demo - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Xamarin-Azure-Demo-Service-Mobile5f2bn6wvshnqu - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Xamarin-Azure-Demo-Service-Mobilej64kpxct6butm - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
