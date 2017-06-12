@@ -2,8 +2,8 @@
 {
     public static class AppSettings
     {
-        //public const string ApiAddress = "https://xamarin-azure-demo-service-mobilecm7pzl2v2yy4o.azurewebsites.net/";
-        public const string ApiAddress = "http://localhost:62162/";
+        public const string ApiAddress = "https://xamarin-azure-demo-service-mobilecm7pzl2v2yy4o.azurewebsites.net/";
+        //public const string ApiAddress = "http://localhost:62162/";
         public const string NotificationHubConnectionString = "ENTER_YOUR_NOTIFICATION_HUB_CONNECTION_STRING_HERE";
         public const string NotificationHubPath = "ENTER_YOUR_NOTIFICATION_HUB_PATH_HERE";
         public const string EmotionApiKey = "6057ad581e854f70a612700b95f13bff";

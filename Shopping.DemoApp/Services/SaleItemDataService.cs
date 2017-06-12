@@ -77,9 +77,14 @@
                     qparams.Add("userid", AuthenticationService.Instance.UserId);
                 }
 
-                qparams.Add("userid", "sid:1234");
+                var queryId = qparams.Any() ? "mySaleItems" : "allSaleItems";
+                var query = this.saleItemsTable.CreateQuery();
+                if (qparams.Any())
+                {
+                    query = query.WithParameters(qparams);
+                }
 
-                await saleItemsTable.PullAsync("allSaleItems", this.saleItemsTable.CreateQuery().WithParameters(qparams));
+                await saleItemsTable.PullAsync(queryId, query);
             }
 
             catch (Exception e)
