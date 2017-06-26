@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>Shopping.DemoApp.iOS</string>
+	<string>com.microsoft.shoppingdemoapp</string>
 	<key>CFBundleIdentifier</key>
-	<string>shopping.demo.app</string>
+	<string>com.microsoft.shoppingdemoapp</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
