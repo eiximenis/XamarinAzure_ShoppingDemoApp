@@ -1,0 +1,1 @@
+call az group deployment create --resource-group xamarin-azure-demo --parameters @parameters-multitenant.json --template-file azuredeploy-multitenant.json

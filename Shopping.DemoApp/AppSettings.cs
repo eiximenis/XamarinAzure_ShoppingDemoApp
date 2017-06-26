@@ -2,15 +2,15 @@
 {
     public static class AppSettings
     {
-        public const string ApiAddress = "https://xamarin-azure-demo-service-mobilecm7pzl2v2yy4o.azurewebsites.net/";
+        public const string ApiAddress = "http://xamarin-azure-demo-multitenant.azurewebsites.net/";
         //public const string ApiAddress = "http://localhost:62162/";
-        public const string NotificationHubConnectionString = "ENTER_YOUR_NOTIFICATION_HUB_CONNECTION_STRING_HERE";
-        public const string NotificationHubPath = "ENTER_YOUR_NOTIFICATION_HUB_PATH_HERE";
-        public const string EmotionApiKey = "6057ad581e854f70a612700b95f13bff";
+        public const string NotificationHubConnectionString = "Endpoint=sb://xamarinazuredemonotifications.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=R3E6O0BMgad19DaPuYq13UC2D4XF5Wi1wzoqjx2MbgA=";
+        public const string NotificationHubPath = "xamarin-azure-demo-notifications";
+        public const string EmotionApiKey = "628d564565954e8aa7dc3217ac34b3a7";
 
 #if __ANDROID__
-        public const string AndroidProjectNumber = "ENTER_YOUR_ANDROID_PROJECT_NUMBER_HERE";
-        public const string AndroidPackageId = "ENTER_YOUR_ANDROID_PACKAGE_ID_HERE";
+        public const string AndroidProjectNumber = "674319019911";
+        public const string AndroidPackageId = "com.microsoft.shoppingdemoapp";
 #endif
     }
 }
