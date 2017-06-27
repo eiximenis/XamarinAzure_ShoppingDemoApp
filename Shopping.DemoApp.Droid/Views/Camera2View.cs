@@ -196,6 +196,10 @@ namespace XamarinUtils.Droid
             {
                 Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
             }
+            catch (SecurityException)
+            {
+                Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
+            }
             catch (NullPointerException)
             {
                 Toast.MakeText(Context, "This device doesn't support Camera2 API.", ToastLength.Short).Show();
