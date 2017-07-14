@@ -3,6 +3,9 @@ using Android.OS;
 using Android.Support.V7.App;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using Com.Lilarcor.Cheeseknife;
+using Android.Content.PM;
+using Android.Runtime;
+using Plugin.Permissions;
 
 namespace Shopping.DemoApp.Droid.Activities
 {
@@ -29,6 +32,10 @@ namespace Shopping.DemoApp.Droid.Activities
             ConfigureToolbar();
         }
 
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
         protected override void OnResume()
         {
             base.OnResume();
