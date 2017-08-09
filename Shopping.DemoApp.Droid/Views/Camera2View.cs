@@ -139,55 +139,6 @@ namespace XamarinUtils.Droid
             );
         }
 
-        public void OpenBackCamera()
-        {
-            if (Context == null || (Context as Activity).IsFinishing || OpeningCamera || (ActiveCameraDevice != null && ActiveCameraDevice.Id == backCameraId))
-            {
-                return;
-            }
-
-
-            var cameraStatus = CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Camera).Result;
-            var storageStatus = CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Storage).Result;
-
-
-            if (cameraStatus != Plugin.Permissions.Abstractions.PermissionStatus.Granted || storageStatus != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
-            {
-                var results = CrossPermissions.Current.RequestPermissionsAsync(new[] { Plugin.Permissions.Abstractions.Permission.Camera, Plugin.Permissions.Abstractions.Permission.Storage }).Result;
-                cameraStatus = results[Plugin.Permissions.Abstractions.Permission.Camera];
-                storageStatus = results[Plugin.Permissions.Abstractions.Permission.Storage];
-            }
-            if (cameraStatus == Plugin.Permissions.Abstractions.PermissionStatus.Granted && storageStatus == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
-            {
-                try
-                {
-                    if (ActiveCameraDevice != null)
-                    {
-                        ActiveCameraDevice.Close();
-                    }
-
-                    OpeningCamera = true;
-
-                    CameraManager manager = (CameraManager)Context.GetSystemService(Context.CameraService);
-
-                    manager.OpenCamera(backCameraId, stateCallback, null);
-
-                    previewSize = backCameraSize;
-                }
-                catch (CameraAccessException)
-                {
-                    Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
-                }
-                catch (NullPointerException)
-                {
-                    Toast.MakeText(Context, "This device doesn't support Camera2 API.", ToastLength.Short).Show();
-                }
-            }
-            else
-            {
-                Toast.MakeText(Context, "No permissions for camera or storage", ToastLength.Short).Show();
-            }
-        }
 
         public void OpenFrontCamera()
         {
@@ -196,52 +147,32 @@ namespace XamarinUtils.Droid
             {
                 return;
             }
-
-           
-            var cameraStatus = CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Camera).Result;
-            var storageStatus = CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.Storage).Result;
-
-
-            if (cameraStatus != Plugin.Permissions.Abstractions.PermissionStatus.Granted || storageStatus != Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+            try
             {
-                var results = CrossPermissions.Current.RequestPermissionsAsync(new[] { Plugin.Permissions.Abstractions.Permission.Camera, Plugin.Permissions.Abstractions.Permission.Storage }).Result;
-                cameraStatus = results[Plugin.Permissions.Abstractions.Permission.Camera];
-                storageStatus = results[Plugin.Permissions.Abstractions.Permission.Storage];
+                if (ActiveCameraDevice != null)
+                {
+                    ActiveCameraDevice.Close();
+                }
+
+                OpeningCamera = true;
+
+                CameraManager manager = (CameraManager)Context.GetSystemService(Context.CameraService);
+
+                manager.OpenCamera(frontCameraId, stateCallback, null);
+
+                previewSize = frontCameraSize;
             }
-
-            if (cameraStatus == Plugin.Permissions.Abstractions.PermissionStatus.Granted && storageStatus == Plugin.Permissions.Abstractions.PermissionStatus.Granted)
+            catch (CameraAccessException)
             {
-                try
-                {
-                    if (ActiveCameraDevice != null)
-                    {
-                        ActiveCameraDevice.Close();
-                    }
-
-                    OpeningCamera = true;
-
-                    CameraManager manager = (CameraManager)Context.GetSystemService(Context.CameraService);
-
-                    manager.OpenCamera(frontCameraId, stateCallback, null);
-
-                    previewSize = frontCameraSize;
-                }
-                catch (CameraAccessException)
-                {
-                    Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
-                }
-                catch (SecurityException ex)
-                {
-                    Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
-                }
-                catch (NullPointerException)
-                {
-                    Toast.MakeText(Context, "This device doesn't support Camera2 API.", ToastLength.Short).Show();
-                }
+                Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
             }
-            else
+            catch (SecurityException ex)
             {
-                Toast.MakeText(Context, "No permissions for camera or storage", ToastLength.Short).Show();
+                Toast.MakeText(Context, "Cannot access the camera.", ToastLength.Short).Show();
+            }
+            catch (NullPointerException)
+            {
+                Toast.MakeText(Context, "This device doesn't support Camera2 API.", ToastLength.Short).Show();
             }
         }
 

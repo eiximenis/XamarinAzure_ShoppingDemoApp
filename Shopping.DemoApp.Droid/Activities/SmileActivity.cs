@@ -14,6 +14,8 @@ using Android.Views.Animations;
 using Android.App;
 using Acr.UserDialogs;
 using Microsoft.ProjectOxford.Emotion.Contract;
+using Plugin.Permissions;
+using System.Collections.Generic;
 
 namespace Shopping.DemoApp.Droid.Fragments
 {
@@ -59,10 +61,10 @@ namespace Shopping.DemoApp.Droid.Fragments
 
         protected override int LayoutResource => Resource.Layout.smileview;
 
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             SetupUiElements();
         }
 
@@ -79,7 +81,6 @@ namespace Shopping.DemoApp.Droid.Fragments
             cameraLayout.AddView(cameraView);
 
             SetInitialState();
-
             cameraView.OpenFrontCamera();
         }
 

@@ -235,6 +235,7 @@
     <Compile Include="Services\AndroidPushService.cs" />
     <Compile Include="Services\GcmBroadcastReceiver.cs" />
     <Compile Include="ShoppingDemoApplication.cs" />
+    <Compile Include="Utils\PermissionsUtils.cs" />
     <Compile Include="Views\SaleItemViewType.cs" />
     <Compile Include="Adapter\SaleRecyclerAdapter.cs" />
     <Compile Include="Adapter\ViewHolders\SaleItemViewHolder.cs" />

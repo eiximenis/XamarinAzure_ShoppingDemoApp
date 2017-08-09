@@ -21,14 +21,15 @@ using Android.Support.V4.Content;
 using Newtonsoft.Json;
 using Shopping.DemoApp.Events;
 using System.Linq;
+using Shopping.DemoApp.Droid.Utils;
 
 namespace Shopping.DemoApp.Droid.Activities
 {
-	[Activity (Label = "Shopping Demo App",
-        MainLauncher = true, 
+    [Activity(Label = "Shopping Demo App",
+        MainLauncher = true,
         ConfigurationChanges = Android.Content.PM.ConfigChanges.Orientation,
         ScreenOrientation = Android.Content.PM.ScreenOrientation.Portrait)]
-	public class MainActivity : BaseActivity
+    public class MainActivity : BaseActivity
     {
         protected override int LayoutResource => Resource.Layout.saleitemgrid;
 
@@ -45,7 +46,7 @@ namespace Shopping.DemoApp.Droid.Activities
 
         private bool refreshData = true;
 
-        protected override void OnCreate (Bundle savedInstanceState)
+        protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -64,7 +65,7 @@ namespace Shopping.DemoApp.Droid.Activities
                 initialized = true;
             }
 
-            if(refreshData)
+            if (refreshData)
             {
                 await PopulateWithData();
                 refreshData = false;
@@ -94,7 +95,7 @@ namespace Shopping.DemoApp.Droid.Activities
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            
+
             switch (item.ItemId)
             {
                 case Resource.Id.action_refresh:
@@ -154,9 +155,19 @@ namespace Shopping.DemoApp.Droid.Activities
             if (this.IsActivityVisible)
             {
                 var confirmed = await UserDialogs.Instance.ConfirmAsync("Time to rate the app! We'll calculate the score based on your smile.", okText: "Let's do it!");
+
+
                 if (confirmed)
                 {
-                    this.StartActivity(typeof(SmileActivity));
+                    var permissions = await PermissionsUtils.CheckPermissions();
+                    if (permissions)
+                    {
+                        this.StartActivity(typeof(SmileActivity));
+                    }
+                    else
+                    {
+                        Toast.MakeText(this, "No permission to access to camera or storage", ToastLength.Short).Show();
+                    }
                 }
             }
         }
